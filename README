@@ -1,0 +1,52 @@
+SIMION GEORGE-VLAD 312CB
+
+PUNCTAJ LOCAL: 115
+
+        Tema consta in implementarea unui sistem de fisiere cu ajutorul arborilor binari.
+Pentru acest lucru am avut nevoie mai intai sa imi creez doua structuri, cea a unui fisier,
+respectiv a unui director. Structurile sunt asemenatoare cu structura unui arbore de cautare
+normal, doar ca pentru cazul unui director, acesta mai are implementat un parinte care este
+un pointer catre directorul in care se afla si de asemenea se regasesc si un pointer
+catre radacina unui arbore de subdirectoare si unul pentru fisiere (acestia compun directorul).
+Implementarea fisierului este mai usoara, el avand doar un pointer catre parinte.
+        Pentru inceput, ca un orice sistem de fisiere, am generat root-ul care este initial gol.
+Fiind root, nu are pe nimeni in stanga sau in dreapta. In main, am realizat parsarea specifica,
+citirea linii quit fiind cea care opreste trimiterea comenzilor de la tastatura. Pentru a crea
+functiile date din tema, am folosit laboratorul de arbori binari de cautare, dar care a suferit
+modificari, pentru a ma avantaja in implementare. Prima functie, numita touch reprezinta
+ca in terminalul de Linux, crearea unui fisier si pentru acestea am avut nevoie de functia
+din laborator modificata de constructie efectiva a unui fisier, dar si de inserare in arbore,
+mai exact in director, in arborele sau de fisiere. Functia de inserare, pe langa cea din
+laborator mai verifica si daca fisierul cu numele dat exista directorul curent. In caz contrar,
+se creaza fisierul sau mai bine zis nodul si se parcurge arborele de fisiere pentru a fi inserat,
+corespunzator cerintei (mod lexicografic) in arborele binar de cautare. Functia mkdir nu necesita
+alte explicatii, deoarece este asemenatoare cu functia touch, singura diferenta fiind tipul
+lor de structura deja explicat anterior. Functia ls inseamna sa afisez toate directoarele si
+fisierele, in aceasta ordine, parcurgand arborii de subdirectoare si fisiere dupa metoda SRD
+(stanga-radacina-dreapta). Functia de rm, dintre toate cele lucrate de mine, am considerat-o
+cea mai complexa deoarece stergerea unui nod afecteaza mai mult decat adaugarea. Am de a face
+cu 3 cazuri de nod de stergere:
+
+    I. Care nu prezinta copii, deci este frunza - in acest caz, arborele nu este afectat
+foarte mult deoarece sterg de la nivelul cel mai de jos, iar pur si simplu apelez functia
+din laborator modificata de distrugere a unui fisier.
+
+   II. Care prezinta un copil - in acest caz, voi lua ca variabila un aux care va retine
+informatiile nodului, iar frunza, oriunde s-ar afla, va lua locul nodului pe care vreau
+sa elimin, iar aux-ul va fi distrus.
+
+  III. Care prezint ambii copii - in acest caz, cand am gasit nodul, voi folosi o functie,
+care imi va parcurge subarborele cu nodul dat ca radacina in partea dreapta si preiau
+informatiile din elementul cel mai stang din acea zona. Informatiile date vor inlocui ceea
+ce se afla in nodul respectiv, iar elementul gasit anterior va fi sters (este frunza, deci
+nu vor aparea facilitati).
+
+        Functia de rmdir este asemanatoare cu functia de rm, singurul lucru diferit este ca
+in cel de al treilea caz, vor fi preluate mai multe informatii decat ca la un fisier, avand
+desigur director. Functia de cd inseamna schimbarea directorului. Un caz particular este
+sa ma intorc la parinte, avand grija sa tratez cazul in care sunt in root si se da in
+linia de comanda cd .. . La modul general, caut directorul cu numele corespunzator si ma
+mut acolo. Am luat o variabila ok pentru a imi confirma ca a gasit si sa nu intre peste
+alte cazuri. Functia de pwd imi arata calea de la root pana unde sunt. Am alocat un vector
+de string uri in care mi-am salvat de la directorul curent pana la fiecare root, trecand
+prin parinti numele lor. La final parcurg vectorul in sens invers si fac afisarea corecta.
